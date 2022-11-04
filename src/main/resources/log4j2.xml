@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+	<Properties>
+		<Property name="LOG_PATTERN">
+			%d{dd MM yyyy HH:mm:ssSSS} %m%n%ex
+		</Property>
+	</Properties>
+	<Appenders>
+		<!-- Rolling File Appender -->
+		<RollingFile name="FileAppender"
+			fileName="logs/log.log"
+			filePattern="logs/articles-api-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<Pattern>${LOG_PATTERN}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+
+		<Logger name="iagopm.articlesapi" level="debug"
+			additivity="false">
+			<AppenderRef ref="FileAppender" />
+		</Logger>
+		<Root level="info">
+			<AppenderRef ref="FileAppender" />
+		</Root>
+	</Loggers>
+</Configuration>
